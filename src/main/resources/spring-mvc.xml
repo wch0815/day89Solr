@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+    <context:annotation-config />
+
+    <context:component-scan base-package="com.cheng.controller" />
+    <context:component-scan base-package="com.cheng.service" />
+
+    <mvc:annotation-driven />
+
+    <mvc:default-servlet-handler/>
+
+    <!--重要！将你的SwaggerConfig配置类注入-->
+    <bean class="com.cheng.config.SwaggerConfig"/>
+    <!--重要！配置swagger资源不被拦截-->
+    <mvc:resources mapping="swagger-ui.html" location="classpath:/META-INF/resources/" />
+    <mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/" />
+
+
+    <!--<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />-->
+
+    <import resource="classpath:spring-mybatis.xml"/>
+</beans>
